@@ -44,7 +44,7 @@ describe("Démarrage du serveur", () => {
             app.startServer();
 
             expect(listenSpy).toHaveBeenCalledWith(
-                process.env.PORT || 3000,
+                process.env.PORT || 3003,
                 "0.0.0.0",
                 expect.any(Function)
             );
