@@ -29,7 +29,7 @@ function startServer({
 	host = HOST,
 	logger = console
 } = {}) {
-	return app._router.listen(port, host, () => {
+	return app.listen(port, host, () => {
 		logger.log(`API démarrée sur le port ${port}`);
 	});
 }
@@ -45,3 +45,4 @@ startIfMain();
 
 module.exports = app;
 module.exports.startServer = startServer;
+module.exports.startIfMain = startIfMain;
