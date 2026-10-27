@@ -5,7 +5,7 @@ const getMessage = require("./clickController");
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3003;
 const HOST = "0.0.0.0";
 
 app.use(cors());
@@ -16,9 +16,6 @@ app.get("/health", (req, res) => {
     res.status(200).json({
         status: "ok"
     });
-	res.status(404).json({
-		status: "ko"
-	});
 });
 
 app.post("/login", authenticate);
