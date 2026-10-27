@@ -1,10 +1,10 @@
-
 const express = require("express");
 const cors = require("cors");
 const authenticate = require("./authController");
 const getMessage = require("./clickController");
 
 const app = express();
+
 const PORT = process.env.PORT || 3000;
 const HOST = "0.0.0.0";
 
@@ -15,12 +15,13 @@ app.use(express.json());
 app.post("/login", authenticate);
 app.post("/click", getMessage);
 
+// Démarre le serveur HTTP
 function startServer({
 	port = PORT,
 	host = HOST,
 	logger = console
-} = {}) {
-	return app._router.listen(port, host, () => {
+	} = {}) {
+	return app.listen(port, host, () => {
 		logger.log(`API démarrée sur le port ${port}`);
 	});
 }
@@ -32,7 +33,9 @@ function startIfMain(isMain = require.main === module) {
 	return null;
 }
 
-startIfMain();
-
 module.exports = app;
 module.exports.startServer = startServer;
+module.exports.startIfMain = startIfMain;
+
+// Point d'entrée
+startIfMain();
