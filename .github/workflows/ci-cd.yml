@@ -127,6 +127,9 @@ jobs:
           script: |
             set -e
             cd /home/groupe1/projet-bouton-rouge-thomas
+            pwd
+            ls -la
+            
 
             # Nouvelles images depuis Docker Hub, puis redémarrage
             docker compose pull
