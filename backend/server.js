@@ -12,6 +12,15 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+app.get("/health", (req, res) => {
+    res.status(200).json({
+        status: "ok"
+    });
+	res.status(404).json({
+		status: "ko"
+	});
+});
+
 app.post("/login", authenticate);
 app.post("/click", getMessage);
 
