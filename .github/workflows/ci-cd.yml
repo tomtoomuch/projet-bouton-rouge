@@ -150,8 +150,8 @@ jobs:
               return 1
             }
 
-            attendre http://localhost:3000/health
-            attendre http://localhost:4200
+            attendre http://localhost:3003/health
+            attendre http://localhost:4204
 
             echo "Déploiement réussi : services opérationnels."
             docker compose ps

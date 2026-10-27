@@ -3,13 +3,13 @@ services:
   backend:
     image: tomtoomuch/backend-redbutton:latest
     ports:
-      - "3000:3000"            # 1. Port du backend sur l'hôte
+      - "3003:3000"            # 1. Port du backend sur l'hôte
     restart: unless-stopped
 
   frontend:
     image: tomtoomuch/frontend-redbutton:latest
     ports:
-      - "4200:80"              # 3. Port du frontend sur l'hôte
+      - "4204:80"              # 3. Port du frontend sur l'hôte
     depends_on:
       - backend                  # 4. Service à démarrer avant le frontend
     restart: unless-stopped
