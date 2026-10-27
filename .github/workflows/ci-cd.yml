@@ -66,6 +66,9 @@ jobs:
       - name: 4. Construire le frontend
         run: docker build -t tomtoomuch/frontend-redbutton:latest ./frontend
 
+      - name: 5. Valider Docker Compose
+        run: docker compose config -q
+
       - name: 5. Lancer les conteneurs
         run: docker compose up -d
 
