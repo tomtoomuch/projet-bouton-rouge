@@ -51,31 +51,31 @@ jobs:
 
     steps:
 
-      - name: 1. Récupérer le code
+      - name: 5. Récupérer le code
         uses: actions/checkout@v4
 
-      - name: 2. Connexion à Docker Hub
+      - name: 6. Connexion à Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: 3. Construire le backend
+      - name: 7. Construire le backend
         run: docker build -t tomtoomuch/backend-redbutton:latest ./backend
 
-      - name: 4. Construire le frontend
+      - name: 8. Construire le frontend
         run: docker build -t tomtoomuch/frontend-redbutton:latest ./frontend
 
-      - name: 5. Valider Docker Compose
+      - name: 9. Valider Docker Compose
         run: docker compose config -q
 
-      - name: 5. Lancer les conteneurs
+      - name: 10. Lancer les conteneurs
         run: docker compose up -d
 
-      - name: 8. Vérifier les conteneurs
+      - name: 11. Vérifier les conteneurs
         run: docker compose ps
 
-      - name: 9. Tester le frontend
+      - name: 12. Tester le frontend
         run: |
           for i in $(seq 1 30); do
             if curl --fail http://localhost:4200/ ; then
@@ -91,19 +91,19 @@ jobs:
           docker compose logs frontend
           exit 1
 
-      - name: 10. Afficher les logs
+      - name: 13. Afficher les logs
         if: always()
         run: docker compose logs
 
-      - name: 11. Arrêter les conteneurs
+      - name: 14. Arrêter les conteneurs
         if: always()
         run: docker compose down
 
-      - name: 12. Push backend
+      - name: 15. Push backend
         if: success()
         run: docker push tomtoomuch/backend-redbutton:latest
 
-      - name: 14. Push frontend
+      - name: 16. Push frontend
         if: success()
         run: docker push tomtoomuch/frontend-redbutton:latest
 
@@ -118,7 +118,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Déployer sur la VM Azure
+      - name: 17. Déployer sur la VM Azure
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ vars.VM_HOST }}
