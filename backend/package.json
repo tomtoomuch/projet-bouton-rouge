@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "jest --runInBand"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.21.2",
+    "supertest": "^7.3.1",
     "tslib": "^2.8.1"
   },
   "devDependencies": {

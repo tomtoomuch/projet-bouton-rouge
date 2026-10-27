@@ -1,5 +1,5 @@
 // Fonction d'authentification
-export const authenticate = (req, res) => {
+const authenticate = (req, res) => {
 	const { username, password } = req.body || {};
 
 	if (username === "admin" && password === "docker") {
@@ -14,3 +14,5 @@ export const authenticate = (req, res) => {
 		message: "Identifiants incorrects."
 	});
 };
+
+module.exports = authenticate;

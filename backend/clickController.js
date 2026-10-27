@@ -1,6 +1,6 @@
-const messages = require("messages")
+const messages = require("./messages")
 
-export const getMessage = (req, res) => {
+const getMessage = (req, res) => {
 	const { count } = req.body || {};
 
 	if (!Number.isInteger(count) || count < 1 || count > 30) {
@@ -15,3 +15,5 @@ export const getMessage = (req, res) => {
 		finished: count === 30
 	});
 };
+
+module.exports = getMessage;

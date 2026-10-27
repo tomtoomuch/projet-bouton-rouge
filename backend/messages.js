@@ -1,4 +1,4 @@
-export const messages = [
+const messages = [
 	"Je t'avais pourtant prévenu.",
 	"Tu as vraiment du mal avec les consignes.",
 	"Bon. Une fois, ça passe.",
@@ -30,3 +30,5 @@ export const messages = [
 	"2...",
 	"BOUM ! 💥 Félicitations. Tu as détruit Internet. Actualise la page pour recommencer."
 ];
+
+module.exports = messages;
