@@ -142,4 +142,36 @@ describe("API Le Bouton Rouge", () => {
             expect(response.status).toBe(404);
         });
     });
+
+
+    describe("Gestion des requêtes HTTP invalides", () => {
+        test("renvoie une erreur 400 si le JSON est mal formé", async () => {
+            const response = await request(app)
+                .post("/click")
+                .set("Content-Type", "application/json")
+                .send('{"count":');
+
+            expect(response.status).toBe(400);
+        });
+
+        test("rejette un corps JSON envoyé en texte brut", async () => {
+            const response = await request(app)
+                .post("/click")
+                .set("Content-Type", "text/plain")
+                .send('{"count":5}');
+
+            expect(response.status).toBe(400);
+            expect(response.body).toEqual({
+                error:
+                    "Le nombre de clics doit être compris entre 1 et 30."
+            });
+        });
+
+        test("rejette une méthode HTTP non prise en charge", async () => {
+            const response = await request(app).get("/click");
+
+            expect(response.status).toBe(404);
+        });
+    });
+
 });

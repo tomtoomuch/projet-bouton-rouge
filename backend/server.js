@@ -6,6 +6,7 @@ const getMessage = require("./clickController");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const HOST = "0.0.0.0";
 
 app.use(cors());
 app.use(express.json());
@@ -14,9 +15,24 @@ app.use(express.json());
 app.post("/login", authenticate);
 app.post("/click", getMessage);
 
-if (require.main === module) {
-	app.listen(PORT, "0.0.0.0", () => {
-		console.log(`API démarrée sur le port ${PORT}`);
+function startServer({
+	port = PORT,
+	host = HOST,
+	logger = console
+} = {}) {
+	return app._router.listen(port, host, () => {
+		logger.log(`API démarrée sur le port ${port}`);
 	});
 }
+
+function startIfMain(isMain = require.main === module) {
+	if (isMain) {
+		return module.exports.startServer();
+	}
+	return null;
+}
+
+startIfMain();
+
 module.exports = app;
+module.exports.startServer = startServer;
