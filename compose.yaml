@@ -1,17 +1,15 @@
 
 services:
   backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+    image: tomtoomuch/backend-cicd:latest
+    container-name: backend-cicd
     ports:
       - "3000:3000"            # 1. Port du backend sur l'hôte
     restart: unless-stopped
 
   frontend:
-    build:
-      context: ./frontend           # 2. Dossier du frontend
-      dockerfile: Dockerfile
+    image: tomtoomuch/frontend-cicd:latest
+    container-name: frontend-cicd
     ports:
       - "4200:80"              # 3. Port du frontend sur l'hôte
     depends_on:

@@ -7,9 +7,6 @@ on:
     branches:
       - dev
       - main
-  pull_request:
-    branches:
-      - dev
   workflow_dispatch:
 
 # un seul pipeline à la fois par branche (évite deux déploiements simultanés)
@@ -35,7 +32,11 @@ jobs:
         with:
           node-version: "22.x"
           cache: "npm"
-      - run: npm ci
+          cache-dependency-path: backend/package-lock.json
+      
+      - name: Installer les dépendances du backend
+        working-directory: backend
+        run: npm ci
 
       - name: Tests backend
         working-directory: backend
@@ -125,10 +126,8 @@ jobs:
             cd /home/groupe1/projet-bouton-rouge-thomas
 
             # Nouvelles images depuis Docker Hub, puis redémarrage
-            docker compose down
-            docker system prune -af
             docker compose pull
-            docker compose up -d
+            docker compose up -d --no-build --remove-orphans
 
             # Les vérifications se font depuis la VM : ports publiés sur localhost
             attendre() {
@@ -145,7 +144,7 @@ jobs:
               return 1
             }
 
-            attendre http://localhost:3000
+            attendre http://localhost:3000/health
             attendre http://localhost:4200
 
             echo "Déploiement réussi : services opérationnels."
