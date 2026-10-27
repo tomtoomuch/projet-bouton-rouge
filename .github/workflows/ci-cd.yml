@@ -24,21 +24,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Récupérer le code
+      - name: 1. Récupérer le code
         uses: actions/checkout@v4
 
-      - name: Installer Node.js
+      - name: 2. Installer Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "22.x"
           cache: "npm"
           cache-dependency-path: backend/package-lock.json
       
-      - name: Installer les dépendances du backend
+      - name: 3. Installer les dépendances du backend
         working-directory: backend
         run: npm ci
 
-      - name: Tests backend
+      - name: 4. Tests backend
         working-directory: backend
         run: npm test
 
@@ -54,19 +54,19 @@ jobs:
       - name: 1. Récupérer le code
         uses: actions/checkout@v4
 
-      - name: 3. Connexion à Docker Hub
+      - name: 2. Connexion à Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: 4. Construire le gateway
-        run: docker build -t tomtoomuch/backend-cicd:latest ./backend
+      - name: 3. Construire le backend
+        run: docker build -t tomtoomuch/backend-redbutton:latest ./backend
 
-      - name: 6. Construire le frontend
-        run: docker build -t tomtoomuch/frontend-cicd:latest ./frontend
+      - name: 4. Construire le frontend
+        run: docker build -t tomtoomuch/frontend-redbutton:latest ./frontend
 
-      - name: 7. Lancer les conteneurs
+      - name: 5. Lancer les conteneurs
         run: docker compose up -d
 
       - name: 8. Vérifier les conteneurs
@@ -98,11 +98,11 @@ jobs:
 
       - name: 12. Push backend
         if: success()
-        run: docker push tomtoomuch/backend-cicd:latest
+        run: docker push tomtoomuch/backend-redbutton:latest
 
       - name: 14. Push frontend
         if: success()
-        run: docker push tomtoomuch/frontend-cicd:latest
+        run: docker push tomtoomuch/frontend-redbutton:latest
 
   # ---------------------------------------------------------------
   # 3. Déploiement sur la VM Azure
