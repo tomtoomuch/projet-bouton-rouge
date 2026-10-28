@@ -14,7 +14,8 @@ app.use(express.json());
 // Routes
 app.get("/health", (req, res) => {
     res.status(200).json({
-        status: "ok"
+        "status": "ok",
+		"service":"backend"
     });
 });
 
