@@ -70,6 +70,16 @@ jobs:
 
       - name: 8. Construire le frontend
         run: docker build -t tomtoomuch/frontend-redbutton:latest ./frontend
+      
+      - name: 8. Scan des vulnérabilités avec Trivy
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: "docker.io/tomtoomuch/backend-redbutton"
+          format: "table"
+          exit-code: "1"
+          ignore-unfixed: true
+          vuln-type: "os,library"
+          severity: "CRITICAL,HIGH"
 
       - name: 9. Valider Docker Compose
         run: docker compose config -q
