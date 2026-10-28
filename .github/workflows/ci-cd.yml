@@ -25,10 +25,15 @@ jobs:
 
     steps:
       - name: 1. Récupérer le code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
+
+      - name: 2. Vérifies les données sensibles
+        uses: gitleaks/gitleaks-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 2. Installer Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7.1.0
         with:
           node-version: "22.x"
           cache: "npm"
@@ -52,10 +57,10 @@ jobs:
     steps:
 
       - name: 5. Récupérer le code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: 6. Connexion à Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -119,7 +124,7 @@ jobs:
 
     steps:
       - name: 17. Déployer sur la VM Azure
-        uses: appleboy/ssh-action@v1
+        uses: appleboy/ssh-action@v1.2.5
         with:
           host: ${{ vars.VM_HOST }}
           username: ${{ vars.VM_USER }}
