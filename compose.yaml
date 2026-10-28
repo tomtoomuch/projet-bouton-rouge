@@ -5,7 +5,17 @@ services:
     ports:
       - "3003:3003"            # 1. Port du backend sur l'hôte
     restart: unless-stopped
-
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:3003/health').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"
+      interval: 30s
+      timeout: 30s
+      start_period: 10s
+      retries: 3
+      
   frontend:
     image: tomtoomuch/frontend-redbutton:latest
     ports:
