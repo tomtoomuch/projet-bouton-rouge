@@ -78,7 +78,7 @@ jobs:
       - name: 12. Tester le frontend
         run: |
           for i in $(seq 1 30); do
-            if curl --fail http://localhost:4200/ ; then
+            if curl --fail http://localhost:4204/ ; then
               echo "Frontend disponible !"
               exit 0
             fi
