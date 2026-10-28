@@ -82,7 +82,7 @@ describe("Démarrage du serveur", () => {
                 .spyOn(app, "startServer")
                 .mockReturnValue({});
 
-            const result = app.startIfMain(false);
+            const result = app.startIfMain();
 
             expect(startSpy).not.toHaveBeenCalled();
             expect(result).toBeNull();
