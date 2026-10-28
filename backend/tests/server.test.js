@@ -1,8 +1,20 @@
-
 const request = require("supertest");
 const app = require("../server");
 
 describe("API Le Bouton Rouge", () => {
+    describe("GET /health", () => {
+        test("devrait répondre que le service est healthy", async () => {
+            const response = await request(app)
+                .get("/health")
+                .send();
+            
+            expect(response.status).toBe(200);
+            expect(response.body).toEqual({
+                "status":"ok",
+                "service":"backend"
+            });
+        });
+    })
     describe("POST /login", () => {
         test("devrait accepter les identifiants valides", async () => {
             const response = await request(app)
