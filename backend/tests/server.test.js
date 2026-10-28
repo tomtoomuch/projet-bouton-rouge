@@ -15,6 +15,7 @@ describe("API Le Bouton Rouge", () => {
             });
         });
     })
+    
     describe("POST /login", () => {
         test("devrait accepter les identifiants valides", async () => {
             const response = await request(app)

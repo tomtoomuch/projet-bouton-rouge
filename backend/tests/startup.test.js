@@ -82,6 +82,17 @@ describe("Démarrage du serveur", () => {
                 .spyOn(app, "startServer")
                 .mockReturnValue({});
 
+            const result = app.startIfMain(false);
+
+            expect(startSpy).not.toHaveBeenCalled();
+            expect(result).toBeNull();
+        });
+
+        test("Comportement par défaut du démarrage du serveur", () => {
+            const startSpy = jest
+                .spyOn(app, "startServer")
+                .mockReturnValue({});
+
             const result = app.startIfMain();
 
             expect(startSpy).not.toHaveBeenCalled();
