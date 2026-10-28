@@ -91,14 +91,14 @@ Vous avez réussi à lancer **Le Bouton Rouge** avec Docker Compose ? Voici six 
 4. Essayez d'accéder directement au backend depuis votre ordinateur avec :
 
    ```bash
-   curl http://localhost:3000/login
+   curl http://localhost:3003/login
    ```
 
    *Attention : cette commande utilise GET alors que `/login` attend POST. Si vous obtenez une réponse HTTP comme « Cannot GET /login », le backend est joignable. Si la connexion est refusée, il ne l'est pas depuis ce port.*
 
 5. Vérifiez que la connexion depuis l'application Angular fonctionne toujours.
 
-**Questions :** comment le frontend peut-il communiquer avec le backend si le port 3000 n'est plus publié sur votre ordinateur ? À quoi sert le nom de service `backend` dans le réseau Docker Compose ?
+**Questions :** comment le frontend peut-il communiquer avec le backend si le port 3003 n'est plus publié sur votre ordinateur ? À quoi sert le nom de service `backend` dans le réseau Docker Compose ?
 
 ---
 

@@ -1,4 +1,6 @@
 // Fonction d'authentification
+const messages = require("./messages");
+
 const authenticate = (req, res) => {
 	const { username, password } = req.body || {};
 
